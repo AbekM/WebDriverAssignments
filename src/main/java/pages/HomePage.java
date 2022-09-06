@@ -32,8 +32,8 @@ public class HomePage extends BaseUtil {
         driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
     }
 
-    public void inputText() {
-        textArea.sendKeys(prop.getProperty("pasteText"));
+    public void inputText(String text) {
+        textArea.sendKeys(text);
     }
 
     public void selectExpirationDate() {
@@ -42,8 +42,8 @@ public class HomePage extends BaseUtil {
         driver.findElement(expirationResultTenMinutes).click();
     }
 
-    public void inputTitle() {
-        postFormTitle.sendKeys(prop.getProperty("pasteTitle"));
+    public void inputTitle(String title) {
+        postFormTitle.sendKeys(title);
     }
 
 }

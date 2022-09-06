@@ -11,19 +11,19 @@ public class ICanWinTest extends BaseUtil {
         new HomePage().openPage();
     }
 
-    @Test (description = "Home page opened", priority = 2)
+    @Test (description = "Text inserted", priority = 2)
     public void textInput() {
-        new HomePage().inputText();
+        new HomePage().inputText(prop.getProperty("iCanWinText"));
     }
 
-    @Test (description = "Home page opened", priority = 3)
+    @Test (description = "Expiration Date Selected", priority = 3)
     public void selectExpirationDate() {
 
         new HomePage().selectExpirationDate();
     }
 
-    @Test (description = "Home page opened", priority = 4)
+    @Test (description = "Title inserted", priority = 4)
     public void inputTitle() {
-        new HomePage().inputTitle();
+        new HomePage().inputTitle(prop.getProperty("iCanWinTitle"));
     }
 }
