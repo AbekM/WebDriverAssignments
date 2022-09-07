@@ -46,7 +46,7 @@ public class BaseUtil {
             driver = new FirefoxDriver();
         }
         driver.manage().window().maximize();
-        driver.manage().deleteAllCookies();
+        /*driver.manage().deleteAllCookies();*/
         driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT, TimeUnit.SECONDS);
 

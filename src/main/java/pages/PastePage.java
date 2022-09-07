@@ -28,16 +28,17 @@ public class PastePage extends BaseUtil {
     }
 
     public String getTitle() {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return driver.getTitle();
     }
-
 
     public String getPasteData() {
         return textArea.getText();
     }
 
-    public void inputTitle() {
-        postFormTitle.sendKeys(prop.getProperty("bringItOnTitle"));
+    public String getSyntax() {
+        return selectedSyntaxArchive.getText();
     }
+
 
 }
