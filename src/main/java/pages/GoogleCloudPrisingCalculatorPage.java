@@ -1,6 +1,7 @@
 package pages;
 
 import base.BaseUtil;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -34,6 +35,33 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
 
     @FindBy(xpath = "//label[contains(text(), 'Local SSD')]/following-sibling::md-select")
     public WebElement localSSDContainer;
+
+    @FindBy(xpath = "//button[@ng-click='listingCtrl.addComputeServer(ComputeEngineForm);']")
+    public WebElement addEstimateButton;
+
+    private final By operatingSystemSelection =
+            By.xpath("//md-option/div[contains(text(),'Free: Debian, CentOS, CoreOS, Ubuntu')]");
+
+    private final By provisioningModelSelection =
+            By.xpath("//md-option/div[contains(text(),'Regular')]");
+
+    private final By seriesSelection =
+            By.xpath("//md-option[@value='n2']");
+
+    private final By machineTypeSelection =
+            By.xpath("//md-option/div[contains(text(),'n1-standard-8')]");
+
+    private final By gpuTypeContainer =
+            By.xpath("//md-select[@ng-model='listingCtrl.computeServer.gpuType']");
+
+    private final By gpuTypeSelector =
+            By.xpath("//md-option[@value='NVIDIA_TESLA_T4']");
+
+    private final By gpuCountContainer =
+            By.xpath("//md-select[@ng-model='listingCtrl.computeServer.gpuCount']");
+
+    private final By gpuCountSelector=
+            By.xpath("//md-select[@ng-model='listingCtrl.computeServer.gpuCount']");
 
     public GoogleCloudPrisingCalculatorPage() {
         PageFactory.initElements(driver, this);
