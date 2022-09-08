@@ -63,6 +63,17 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
     private final By gpuCountSelector=
             By.xpath("//md-select[@ng-model='listingCtrl.computeServer.gpuCount']");
 
+    private final By ssdSelector=
+            By.xpath("//md-option[@ng-repeat='item in " +
+                    "listingCtrl.dynamicSsd.computeServer' and @value = '2']");
+
+    private final By regionSelector=
+            By.xpath("//md-option[@region-option and @value='europe-west3' " +
+                    "and @id = 'select_option_226']");
+
+    private final By committedUsageSelector=
+            By.xpath("//md-option[@value='1' and @id = 'select_option_127']");
+
     public GoogleCloudPrisingCalculatorPage() {
         PageFactory.initElements(driver, this);
     }
