@@ -7,7 +7,7 @@ import pages.PasteBinHomePage;
 import pages.PastePage;
 
 
-public class BringItOnTest extends BaseUtil {
+public class BringItonTest extends BaseUtil {
     @Test (description = "Home page opened", priority = 1)
     public void homePageOpened() {
         new PasteBinHomePage().openPage();
@@ -50,4 +50,7 @@ public class BringItOnTest extends BaseUtil {
         String PasteData = new PastePage().getPasteData();
         Assert.assertEquals(PasteData, prop.getProperty("bringItOnText"));
     }
+
+
+
 }
