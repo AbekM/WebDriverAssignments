@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
 
@@ -63,9 +65,44 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
     private final By gpuCountSelector=
             By.xpath("//md-select[@ng-model='listingCtrl.computeServer.gpuCount']");
 
+    private final By localSsdSelector=
+            By.xpath("//md-select[@ng-model='listingCtrl.computeServer.gpuCount']");
+
     public GoogleCloudPrisingCalculatorPage() {
         PageFactory.initElements(driver, this);
     }
-    
+
+    public void inputInstances() {
+        instancesInput.sendKeys(prop.getProperty("numberOfInstances"));
+    }
+    public void chooseOS() {
+        operatingSystemContainer.click();
+        driver.findElement(operatingSystemSelection).click();
+    }
+    public void chooseVMClass() {
+        provisioningModelContainer.click();
+        driver.findElement(provisioningModelSelection).click();
+    }
+    public void chooseInstanceType() {
+        seriesContainer.click();
+        driver.findElement(seriesSelection).click();
+        machineTypeContainer.click();
+        driver.findElement(machineTypeSelection).click();
+    }
+    public void addGpus() {
+        addGPUCheckbox.click();
+        driver.findElement(gpuCountContainer).click();
+        driver.findElement(gpuCountSelector).click();
+        driver.findElement(gpuTypeContainer).click();
+        driver.findElement(gpuTypeSelector).click();
+    }
+    public void chooseSsd() {
+        localSSDContainer.click();
+        driver.findElement(localSsdSelector).click();
+    }
+    public void chooseDatabaseLocation() {
+        databaseLocationContainer.click();
+        //driver.findElement().click();
+    }
 
 }
