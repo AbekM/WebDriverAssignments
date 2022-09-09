@@ -116,7 +116,7 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
         committedUsageContainer.click();
         driver.findElement(committedUsageSelector).click();
     }
-    public void pressAddToEstimateButton() {
+    public void clickAddToEstimateButton() {
         addEstimateButton.click();
     }
 
