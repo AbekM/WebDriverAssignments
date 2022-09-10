@@ -77,10 +77,13 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
     private final By totalEstimatedCostSelector=
             By.xpath("//b[contains(@class, 'ng-binding') " +
                     "and contains(text(), 'Total Estimated Cost')]");
+    private final By emailButton=
+            By.xpath("//button[@id='email_quote']");
     public GoogleCloudPrisingCalculatorPage() {
         PageFactory.initElements(driver, this);
     }
     public void inputInstances() {
+        instancesInput.click();
         instancesInput.sendKeys(prop.getProperty("numberOfInstances"));
     }
     public void chooseOS() {
@@ -118,6 +121,9 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
     }
     public void clickAddToEstimateButton() {
         addEstimateButton.click();
+    }
+    public void clickEmailButton() {
+        driver.findElement(emailButton).click();
     }
 
 }
