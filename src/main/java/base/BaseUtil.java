@@ -49,9 +49,7 @@ public class BaseUtil {
         /*driver.manage().deleteAllCookies();*/
         driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT, TimeUnit.SECONDS);
-
     }
-
     @AfterClass(alwaysRun = true)
     public void tearDown() {
         driver.quit();

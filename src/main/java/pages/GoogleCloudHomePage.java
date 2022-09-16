@@ -30,7 +30,6 @@ public class GoogleCloudHomePage extends BaseUtil {
         driver.get(prop.getProperty("googleCloudURL"));
         driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
     }
-
     public void inputSearch() {
         searchButton.click();
         driver.findElement(searchBox).sendKeys(prop.getProperty("hurtMePlentySearchText"), Keys.ENTER);
