@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class PastePage extends BaseUtil {
 
-    @FindBy(xpath = "//textarea")
+    @FindBy(xpath = "//div[contains(@class, 'source')]")
     private WebElement textArea;
 
     @FindBy(xpath = "//div[@class='left']//a")

@@ -29,7 +29,8 @@ public class HurtMePlenty extends BaseUtil {
 
     @Test (description = "VM Class chosen", priority = 6)
     public void chooseVmClass() {new GoogleCloudPrisingCalculatorPage().chooseVMClass();}
-
+    @Test (description = "VM Class chosen", priority = 6)
+    public void chooseSeries() {new GoogleCloudPrisingCalculatorPage().chooseSeries();}
     @Test (description = "Choose instance type", priority = 7)
     public void instanceTypeChosen() {new GoogleCloudPrisingCalculatorPage().chooseInstanceType();}
 
