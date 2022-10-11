@@ -2,7 +2,6 @@ package pages;
 
 import base.BaseUtil;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -10,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
+import java.util.Objects;
 
 
 public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
@@ -73,14 +72,17 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
             By.xpath("//div[@class='md-list-item-text ng-binding' " +
                     "and contains(text(), 'Provisioning model')]");
     private final By instanceTypeResult=
-            By.xpath("//div[contains(@class, 'md-list-item-text ng-binding') " +
-                    "and contains(text(), 'Instance type')]");
+            By.xpath("//div[contains(@class, 'md-list-item-text ng-binding')" +
+                    " and contains(text(), 'Instance type')]");
     private final By operatingSystemResult=
             By.xpath("//div[contains(@class, 'md-list-item-text') " +
                     "and contains(text(), 'Operating')]");
     private final By gpuResult=
             By.xpath("//div[contains(@class, 'md-list-item-text') " +
                     "and contains(text(), 'GPU')]");
+    private final By ssdResult=
+            By.xpath("//div[contains(@class, 'md-list-item-text') " +
+                    "and contains(text(), 'SSD')]");
     private final By totalEstimatedCostSelector=
             By.xpath("//b[contains(@class, 'ng-binding') " +
                     "and contains(text(), 'Total Estimated Cost')]");
@@ -155,4 +157,28 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
         driver.findElement(emailButton).click();
     }
 
+    public Boolean compareRegion() {
+        String NumberOfInstances = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(regionResult)).getText();
+        return Objects.equals(NumberOfInstances, prop.getProperty("hurtMePlentyRegion"));
+    }
+    public Boolean compareCommittedTerms() {
+        String NumberOfInstances = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(committedTermResult)).getText();
+        return Objects.equals(NumberOfInstances, prop.getProperty("hurtMePlentyCommitmentTerm"));
+    }
+    public Boolean compareProvisioningModel() {
+        String Result = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(provisioningModelResult)).getText();
+        return Objects.equals(Result, prop.getProperty("hurtMePlentyVMClass"));
+    }
+    public Boolean compareInstanceType() {
+        String Result = driver.findElement(instanceTypeResult).getText();
+        return Objects.equals(Result, prop.getProperty("hurtMePlentyInstanceType"));
+    }
+    public Boolean compareSsd() {
+        String Result = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(ssdResult)).getText();
+        return Objects.equals(Result, prop.getProperty("hurtMePlentyLocalSSD"));
+    }
 }

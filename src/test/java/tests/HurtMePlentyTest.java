@@ -1,11 +1,12 @@
 package tests;
 
 import base.BaseUtil;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
 
 
-public class HurtMePlenty extends BaseUtil {
+public class HurtMePlentyTest extends BaseUtil {
     @Test (description = "Home page opened", priority = 1)
     public void homePageOpened() {
         new GoogleCloudHomePage().openPage();
@@ -21,15 +22,14 @@ public class HurtMePlenty extends BaseUtil {
 
     @Test (description = "Input number of instances", priority = 4)
     public void inputNumberOfInstances() {
-        new GoogleCloudPrisingCalculatorPage().inputInstances();
-    }
+        new GoogleCloudPrisingCalculatorPage().inputInstances();}
 
     @Test (description = "OS chosen", priority = 5)
     public void chooseOs() {new GoogleCloudPrisingCalculatorPage().chooseOS();}
 
     @Test (description = "VM Class chosen", priority = 6)
     public void chooseVmClass() {new GoogleCloudPrisingCalculatorPage().chooseVMClass();}
-    @Test (description = "VM Class chosen", priority = 6)
+    @Test (description = "Series chosen", priority = 6)
     public void chooseSeries() {new GoogleCloudPrisingCalculatorPage().chooseSeries();}
     @Test (description = "Choose instance type", priority = 7)
     public void instanceTypeChosen() {new GoogleCloudPrisingCalculatorPage().chooseInstanceType();}
@@ -48,5 +48,11 @@ public class HurtMePlenty extends BaseUtil {
 
     @Test (description = "Click add to Estimate button", priority = 11)
     public void clickAddToEstimateButton() {new GoogleCloudPrisingCalculatorPage().clickAddToEstimateButton();}
-
+    @Test (description = "Compare results", priority = 12)
+    public void checkResults() {
+        Assert.assertTrue(new GoogleCloudPrisingCalculatorPage().compareRegion() &
+                new GoogleCloudPrisingCalculatorPage().compareCommittedTerms() &
+                new GoogleCloudPrisingCalculatorPage().compareProvisioningModel() &
+                new GoogleCloudPrisingCalculatorPage().compareInstanceType() &
+                new GoogleCloudPrisingCalculatorPage().compareSsd());}
 }
