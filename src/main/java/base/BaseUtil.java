@@ -2,6 +2,7 @@ package base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
@@ -31,6 +32,18 @@ public class BaseUtil {
             e.printStackTrace();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+    public void openNewTab(){
+        driver.switchTo().newWindow(WindowType.TAB);
+    }
+    public void switchToAnotherTab(){
+        String originalWindow = driver.getWindowHandle();
+        for (String windowHandle : driver.getWindowHandles()) {
+            if(!originalWindow.contentEquals(windowHandle)) {
+                driver.switchTo().window(windowHandle);
+                break;
+            }
         }
     }
     @BeforeClass(alwaysRun = true)

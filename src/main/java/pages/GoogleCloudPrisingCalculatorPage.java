@@ -2,6 +2,7 @@ package pages;
 
 import base.BaseUtil;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -59,9 +60,6 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
                     "and @id='select_option_228']/div");
     private final By committedUsageSelector=
             By.xpath("//md-option[@value='1' and @id = 'select_option_128']/div");
-
-    private final By numberOfInstancesResult=
-            By.xpath("//span[@class='ng-binding ng-scope']");
     private final By regionResult=
             By.xpath("//div[@class='md-list-item-text ng-binding' " +
                     "and contains(text(), 'Region')]");
@@ -74,12 +72,6 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
     private final By instanceTypeResult=
             By.xpath("//div[contains(@class, 'md-list-item-text ng-binding')" +
                     " and contains(text(), 'Instance type')]");
-    private final By operatingSystemResult=
-            By.xpath("//div[contains(@class, 'md-list-item-text') " +
-                    "and contains(text(), 'Operating')]");
-    private final By gpuResult=
-            By.xpath("//div[contains(@class, 'md-list-item-text') " +
-                    "and contains(text(), 'GPU')]");
     private final By ssdResult=
             By.xpath("//div[contains(@class, 'md-list-item-text') " +
                     "and contains(text(), 'SSD')]");
@@ -88,12 +80,20 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
                     "and contains(text(), 'Total Estimated Cost')]");
     private final By emailButton=
             By.xpath("//button[@id='email_quote']");
+    private final By sendEmailButton=
+            By.xpath("//button[contains(@class, 'cpc-button') and @aria-label = 'Send Email']");
+    private final By emailField=
+            By.xpath("//form[@name='emailForm']//input[@ng-model='emailQuote.user.email']");
     private final By mainIframe=
             By.xpath("//devsite-iframe/iframe");
     private final By myIframe=
             By.xpath("//iframe[@id='myFrame']");
     public GoogleCloudPrisingCalculatorPage() {
         PageFactory.initElements(driver, this);
+    }
+
+    public String getWindowHandle(){
+        return driver.getWindowHandle();
     }
     public void inputInstances() {
         driver.switchTo().frame(driver.findElement(mainIframe));
@@ -153,15 +153,12 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
     public void clickAddToEstimateButton() {
         addEstimateButton.click();
     }
-    public void clickEmailButton() {
-        driver.findElement(emailButton).click();
-    }
-
     public Boolean compareRegion() {
         String NumberOfInstances = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(regionResult)).getText();
         return Objects.equals(NumberOfInstances, prop.getProperty("hurtMePlentyRegion"));
     }
+
     public Boolean compareCommittedTerms() {
         String NumberOfInstances = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(committedTermResult)).getText();
@@ -180,5 +177,26 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
         String Result = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(ssdResult)).getText();
         return Objects.equals(Result, prop.getProperty("hurtMePlentyLocalSSD"));
+    }
+    public void clickEmailButton() {
+        new WebDriverWait(driver, Duration.ofSeconds(20))
+                .until(ExpectedConditions.elementToBeClickable(emailButton)).click();
+    }
+    public void clickSendEmailButton() {
+        new WebDriverWait(driver, Duration.ofSeconds(20))
+                .until(ExpectedConditions.elementToBeClickable(sendEmailButton)).click();
+    }
+    public void inputCopiedEmail() {
+        driver.switchTo().frame(driver.findElement(mainIframe));
+        driver.switchTo().frame(driver.findElement(myIframe));
+        new WebDriverWait(driver, Duration.ofSeconds(20))
+                .until(ExpectedConditions.elementToBeClickable(emailField)).click();
+        driver.findElement(emailField).sendKeys(Keys.CONTROL + "V");
+    }
+    public String getTotalEstimatedCostText() {
+        driver.switchTo().frame(driver.findElement(mainIframe));
+        driver.switchTo().frame(driver.findElement(myIframe));
+        return new WebDriverWait(driver, Duration.ofSeconds(20))
+                .until(ExpectedConditions.presenceOfElementLocated(totalEstimatedCostSelector)).getText();
     }
 }
