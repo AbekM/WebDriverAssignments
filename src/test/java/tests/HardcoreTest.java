@@ -39,32 +39,32 @@ public class HardcoreTest extends BaseUtil {
     @Test (description = "Click add to Estimate button", priority = 12)
     public void clickAddToEstimateButton() {
         new GoogleCloudPrisingCalculatorPage().clickAddToEstimateButton();}
-    @Test (description = "Click add to Estimate button", priority = 13)
+    @Test (description = "Click Email button", priority = 13)
     public void clickEmailButton() {
         new GoogleCloudPrisingCalculatorPage().clickEmailButton();
     }
-    @Test(description = "Home page opened", priority = 14)
+    @Test(description = "Copy Generated Email", priority = 14)
     public void getGeneratedEmail() {
         openNewTab();
         new YopMailHomePage().openPage();
         new YopMailHomePage().generateNewEmail();
         new YopMailGeneratorPage().copyGeneratedEmail();
         }
-    @Test (description = "Click add to Estimate button", priority = 15)
+    @Test (description = "Paste Generated Email to the field", priority = 15)
     public void inputEmail() {
         switchToAnotherTab();
         new GoogleCloudPrisingCalculatorPage().inputCopiedEmail();
     }
-    @Test (description = "Click add to Estimate button", priority = 15)
+    @Test (description = "Click Send Email button", priority = 15)
     public void sendEmail() {
         new GoogleCloudPrisingCalculatorPage().clickSendEmailButton();
     }
-    @Test(description = "Home page opened", priority = 16)
+    @Test(description = "Navigate to the Inbox", priority = 16)
     public void checkEmail() {
         switchToAnotherTab();
         new YopMailGeneratorPage().checkInbox();
     }
-    @Test(description = "Home page opened", priority = 17)
+    @Test(description = "Compare results from the mail", priority = 17)
     public void compareResults() throws InterruptedException {
         while (Objects.equals(new YopMailInboxPage().getMailCount(), "0 mail")){
             Thread.sleep(2000);

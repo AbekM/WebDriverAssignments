@@ -91,10 +91,6 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
     public GoogleCloudPrisingCalculatorPage() {
         PageFactory.initElements(driver, this);
     }
-
-    public String getWindowHandle(){
-        return driver.getWindowHandle();
-    }
     public void inputInstances() {
         driver.switchTo().frame(driver.findElement(mainIframe));
         driver.switchTo().frame(driver.findElement(myIframe));
@@ -158,7 +154,6 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
                 .until(ExpectedConditions.elementToBeClickable(regionResult)).getText();
         return Objects.equals(NumberOfInstances, prop.getProperty("hurtMePlentyRegion"));
     }
-
     public Boolean compareCommittedTerms() {
         String NumberOfInstances = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(committedTermResult)).getText();
