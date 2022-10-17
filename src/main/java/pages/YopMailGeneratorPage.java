@@ -8,12 +8,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.security.Key;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class YopMailGeneratorPage extends BaseUtil {
-
     @FindBy(xpath = "///div[@id='egen']")
     public WebElement generatedEmail;
     @FindBy(xpath = "//button[@id='cprnd']")
@@ -22,14 +20,8 @@ public class YopMailGeneratorPage extends BaseUtil {
     public WebElement checkInboxButton;
     @FindBy(xpath = "//body")
     public WebElement pageBody;
-
-
     public YopMailGeneratorPage() {
         PageFactory.initElements(driver, this);
-    }
-
-    public String generatedEmail () {
-        return generatedEmail.getText();
     }
     public void copyGeneratedEmail() {
         driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
@@ -39,8 +31,5 @@ public class YopMailGeneratorPage extends BaseUtil {
     }
     public void checkInbox() {
         checkInboxButton.click();
-    }
-    public String getWindowHandle(){
-        return driver.getWindowHandle();
     }
 }

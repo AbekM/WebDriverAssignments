@@ -15,13 +15,10 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class BaseUtil {
-
     public static long PAGE_LOAD_TIMEOUT = 20;
     public static long IMPLICIT_WAIT = 10;
     public static WebDriver driver;
     public static Properties prop;
-
-
     public BaseUtil(){
         try {
             prop = new Properties();
@@ -49,7 +46,6 @@ public class BaseUtil {
     @BeforeClass(alwaysRun = true)
     public void setup() {
         String browserName = prop.getProperty("browser");
-
         if(browserName.equals("chrome")){
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
@@ -59,7 +55,6 @@ public class BaseUtil {
             driver = new FirefoxDriver();
         }
         driver.manage().window().maximize();
-        /*driver.manage().deleteAllCookies();*/
         driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT, TimeUnit.SECONDS);
     }

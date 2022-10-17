@@ -14,7 +14,6 @@ import java.util.Objects;
 
 
 public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
-
     @FindBy(xpath = "//label[contains(text(), 'Number of instances')]/following-sibling::input")
     public WebElement instancesInput;
     @FindBy(xpath = "//label[contains(text(), 'Operating System')]/following-sibling::md-select")
