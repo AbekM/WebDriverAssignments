@@ -1,6 +1,7 @@
 package tests;
 
 import base.BaseUtil;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
 
@@ -70,9 +71,12 @@ public class HardcoreTest extends BaseUtil {
             Thread.sleep(2000);
             new YopMailInboxPage().refreshPage();
         }
-        System.out.println(new YopMailInboxPage().getEmailText());
-        System.out.println("---------------------");
+        String MailResult = new YopMailInboxPage().getEmailText();
         switchToAnotherTab();
-        System.out.println(new GoogleCloudPrisingCalculatorPage().getTotalEstimatedCostText());
+        String GoogleResult = new GoogleCloudPrisingCalculatorPage().getTotalEstimatedCostText();
+        GoogleResult = GoogleResult.split("USD ")[1];
+        GoogleResult = GoogleResult.split(" per 1")[0];
+        MailResult = MailResult.split("USD ")[1];
+        Assert.assertEquals(GoogleResult, MailResult);
     }
 }
