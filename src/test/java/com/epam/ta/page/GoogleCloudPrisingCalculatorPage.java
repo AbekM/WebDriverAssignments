@@ -1,19 +1,19 @@
-package pages;
+package com.epam.ta.page;
 
-import base.BaseUtil;
+import com.epam.ta.service.TestDataReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.Objects;
 
 
-public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
+public class GoogleCloudPrisingCalculatorPage extends AbstractPage {
     @FindBy(xpath = "//label[contains(text(), 'Number of instances')]/following-sibling::input")
     public WebElement instancesInput;
     @FindBy(xpath = "//label[contains(text(), 'Operating System')]/following-sibling::md-select")
@@ -87,110 +87,124 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
             By.xpath("//devsite-iframe/iframe");
     private final By myIframe=
             By.xpath("//iframe[@id='myFrame']");
-    public GoogleCloudPrisingCalculatorPage() {
-        PageFactory.initElements(driver, this);
+    public GoogleCloudPrisingCalculatorPage(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(this.driver, this);
     }
-    public void inputInstances() {
+    public GoogleCloudPrisingCalculatorPage inputInstances() {
         driver.switchTo().frame(driver.findElement(mainIframe));
         driver.switchTo().frame(driver.findElement(myIframe));
         instancesInput.click();
-        instancesInput.sendKeys(prop.getProperty("hurtMePlentyNumberOfInstances"));
+        instancesInput.sendKeys(TestDataReader.getTestData("hurtMePlentyNumberOfInstances"));
+        return this;
     }
-    public void chooseOS() {
+    public GoogleCloudPrisingCalculatorPage chooseOS() {
         operatingSystemContainer.click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(operatingSystemSelection)).click();
+        return this;
     }
-    public void chooseVMClass() {
+    public GoogleCloudPrisingCalculatorPage chooseVMClass() {
         provisioningModelContainer.click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(provisioningModelSelection)).click();
+        return this;
     }
-    public void chooseSeries() {
+    public GoogleCloudPrisingCalculatorPage chooseSeries() {
         seriesContainer.click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(seriesSelection)).click();
+        return this;
     }
-    public void chooseInstanceType() {
+    public GoogleCloudPrisingCalculatorPage chooseInstanceType() {
         seriesContainer.click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(seriesSelection)).click();
         machineTypeContainer.click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(machineTypeSelection)).click();
+        return this;
     }
-    public void addGpus() {
+    public GoogleCloudPrisingCalculatorPage addGpus() {
         addGPUCheckbox.click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(gpuTypeContainer)).click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(gpuTypeSelector)).click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(gpuCountContainer)).click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(gpuCountSelector)).click();
+        return this;
     }
-    public void chooseSsd() {
+    public GoogleCloudPrisingCalculatorPage chooseSsd() {
         localSSDContainer.click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(localSsdSelector)).click();
+        return this;
     }
-    public void chooseDatabaseLocation() {
+    public GoogleCloudPrisingCalculatorPage chooseDatabaseLocation() {
         databaseLocationContainer.click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(databaseLocationSelector)).click();
+        return this;
     }
-    public void chooseCommittedUsage() {
+    public GoogleCloudPrisingCalculatorPage chooseCommittedUsage() {
         committedUsageContainer.click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(committedUsageSelector)).click();
+        return this;
     }
-    public void clickAddToEstimateButton() {
+    public GoogleCloudPrisingCalculatorPage clickAddToEstimateButton() {
         addEstimateButton.click();
+        return this;
     }
     public Boolean compareRegion() {
-        String NumberOfInstances = new WebDriverWait(driver, Duration.ofSeconds(10))
+        String Result = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(regionResult)).getText();
-        return Objects.equals(NumberOfInstances, prop.getProperty("hurtMePlentyRegion"));
+        return Objects.equals(Result, TestDataReader.getTestData("hurtMePlentyRegion"));
     }
     public Boolean compareCommittedTerms() {
-        String NumberOfInstances = new WebDriverWait(driver, Duration.ofSeconds(10))
+        String Result = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(committedTermResult)).getText();
-        return Objects.equals(NumberOfInstances, prop.getProperty("hurtMePlentyCommitmentTerm"));
+        return Objects.equals(Result, TestDataReader.getTestData("hurtMePlentyCommitmentTerm"));
     }
     public Boolean compareProvisioningModel() {
-        String Result = new WebDriverWait(driver, Duration.ofSeconds(10))
+        String Result = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(provisioningModelResult)).getText();
-        return Objects.equals(Result, prop.getProperty("hurtMePlentyVMClass"));
+        return Objects.equals(Result, TestDataReader.getTestData("hurtMePlentyVMClass"));
     }
     public Boolean compareInstanceType() {
         String Result = driver.findElement(instanceTypeResult).getText();
-        return Objects.equals(Result, prop.getProperty("hurtMePlentyInstanceType"));
+        return Objects.equals(Result, TestDataReader.getTestData("hurtMePlentyInstanceType"));
     }
     public Boolean compareSsd() {
-        String Result = new WebDriverWait(driver, Duration.ofSeconds(10))
+        String Result = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(ssdResult)).getText();
-        return Objects.equals(Result, prop.getProperty("hurtMePlentyLocalSSD"));
+        return Objects.equals(Result, TestDataReader.getTestData("hurtMePlentyLocalSSD"));
     }
-    public void clickEmailButton() {
-        new WebDriverWait(driver, Duration.ofSeconds(20))
+    public GoogleCloudPrisingCalculatorPage clickEmailButton() {
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(emailButton)).click();
+        return this;
     }
-    public void clickSendEmailButton() {
-        new WebDriverWait(driver, Duration.ofSeconds(20))
+    public GoogleCloudPrisingCalculatorPage clickSendEmailButton() {
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(sendEmailButton)).click();
+        return this;
     }
-    public void inputCopiedEmail() {
+    public GoogleCloudPrisingCalculatorPage inputCopiedEmail() {
         driver.switchTo().frame(driver.findElement(mainIframe));
         driver.switchTo().frame(driver.findElement(myIframe));
-        new WebDriverWait(driver, Duration.ofSeconds(20))
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(emailField)).click();
         driver.findElement(emailField).sendKeys(Keys.CONTROL + "V");
+        return this;
     }
     public String getTotalEstimatedCostText() {
         driver.switchTo().frame(driver.findElement(mainIframe));
         driver.switchTo().frame(driver.findElement(myIframe));
-        return new WebDriverWait(driver, Duration.ofSeconds(20))
+        return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.presenceOfElementLocated(totalEstimatedCostSelector)).getText();
     }
 }
