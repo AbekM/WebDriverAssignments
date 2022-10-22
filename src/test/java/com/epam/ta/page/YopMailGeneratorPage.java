@@ -1,35 +1,33 @@
-package pages;
+package com.epam.ta.page;
 
-import base.BaseUtil;
-import org.openqa.selenium.Keys;
+
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-public class YopMailGeneratorPage extends BaseUtil {
-    @FindBy(xpath = "///div[@id='egen']")
-    public WebElement generatedEmail;
+public class YopMailGeneratorPage extends AbstractPage {
     @FindBy(xpath = "//button[@id='cprnd']")
     public WebElement copyEmailButton;
     @FindBy(xpath = "//span[text() = 'Check Inbox']")
     public WebElement checkInboxButton;
-    @FindBy(xpath = "//body")
-    public WebElement pageBody;
-    public YopMailGeneratorPage() {
-        PageFactory.initElements(driver, this);
+
+    public YopMailGeneratorPage(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(this.driver, this);
     }
-    public void copyGeneratedEmail() {
+    public YopMailGeneratorPage copyGeneratedEmail() {
         driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(copyEmailButton)).click();
-        pageBody.sendKeys(Keys.CONTROL + "T");
+        return this;
     }
-    public void checkInbox() {
+    public YopMailInboxPage checkInbox() {
         checkInboxButton.click();
+        return new YopMailInboxPage(driver);
     }
 }
