@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class YopMailGeneratorPage extends AbstractPage {
@@ -22,7 +23,7 @@ public class YopMailGeneratorPage extends AbstractPage {
     }
     public YopMailGeneratorPage copyGeneratedEmail() {
         driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(copyEmailButton)).click();
         return this;
     }
