@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 
@@ -60,7 +61,7 @@ public class PasteBinHomePage extends AbstractPage {
     }
     public PastePage createNewPaste() {
         createNewPasteButton.click();
-        new WebDriverWait(driver, IMPLICIT_WAIT)
+        new WebDriverWait(driver, Duration.ofSeconds(IMPLICIT_WAIT))
                 .until(ExpectedConditions.presenceOfElementLocated(selectedSyntaxArchive));
         return new PastePage(driver);
     }
