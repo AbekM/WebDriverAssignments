@@ -78,7 +78,7 @@ public class GoogleCloudPrisingCalculatorPage extends BaseUtil {
             By.xpath("//b[contains(@class, 'ng-binding') " +
                     "and contains(text(), 'Total Estimated Cost')]");
     private final By emailButton=
-            By.xpath("//button[@id='email_quote']");
+            By.xpath("//button[@id='Email Estimate']");
     private final By sendEmailButton=
             By.xpath("//button[contains(@class, 'cpc-button') and @aria-label = 'Send Email']");
     private final By emailField=
