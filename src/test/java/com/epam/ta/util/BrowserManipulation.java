@@ -12,6 +12,7 @@ public class BrowserManipulation extends CommonConditions {
     public void openNewTab(){
         driver.switchTo().newWindow(WindowType.TAB);
     }
+
     public void switchToAnotherTab(){
         String originalWindow = driver.getWindowHandle();
         for (String windowHandle : driver.getWindowHandles()) {
