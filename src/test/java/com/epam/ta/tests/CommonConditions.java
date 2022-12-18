@@ -1,12 +1,14 @@
 package com.epam.ta.tests;
 
 import com.epam.ta.driver.DriverSingleton;
+import com.epam.ta.util.BrowserManipulation;
 import com.epam.ta.util.TestListener;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WindowType;
 import org.testng.annotations.*;
 
 @Listeners({TestListener.class})
-public class CommonConditions {
+public class CommonConditions{
 
     protected WebDriver driver;
 

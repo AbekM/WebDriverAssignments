@@ -3,6 +3,7 @@ package com.epam.ta.tests;
 
 import com.epam.ta.page.*;
 import com.epam.ta.util.BrowserManipulation;
+import org.openqa.selenium.WindowType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -30,6 +31,7 @@ public class HardcoreTest extends CommonConditions {
 
     @Test(description = "Copy Generated Email", priority = 14)
     public void getGeneratedEmail() {
+        //driver.switchTo().newWindow(WindowType.TAB);
         new BrowserManipulation().openNewTab();
         new YopMailHomePage(driver)
                 .openPage()
@@ -38,7 +40,15 @@ public class HardcoreTest extends CommonConditions {
         }
     @Test (description = "Paste Generated Email to the field", priority = 15)
     public void inputEmail() {
-        new BrowserManipulation().switchToAnotherTab();
+        String originalWindow = driver.getWindowHandle();
+        for (String windowHandle : driver.getWindowHandles()) {
+            if(!originalWindow.contentEquals(windowHandle)) {
+                driver.switchTo().window(windowHandle);
+                break;
+            }
+        }
+
+        //new BrowserManipulation().switchToAnotherTab();
         new GoogleCloudPrisingCalculatorPage(driver)
                 .inputCopiedEmail()
                 .clickSendEmailButton();
@@ -46,7 +56,14 @@ public class HardcoreTest extends CommonConditions {
 
     @Test(description = "Navigate to the Inbox", priority = 16)
     public void checkEmail() {
-        new BrowserManipulation().switchToAnotherTab();
+        String originalWindow = driver.getWindowHandle();
+        for (String windowHandle : driver.getWindowHandles()) {
+            if(!originalWindow.contentEquals(windowHandle)) {
+                driver.switchTo().window(windowHandle);
+                break;
+            }
+        }
+        //new BrowserManipulation().switchToAnotherTab();
         new YopMailGeneratorPage(driver).checkInbox();
     }
     @Test(description = "Compare results from the mail", priority = 17)
@@ -56,7 +73,14 @@ public class HardcoreTest extends CommonConditions {
             new YopMailInboxPage(driver).refreshPage();
         }
         String MailResult = new YopMailInboxPage(driver).getEmailText();
-        new BrowserManipulation().switchToAnotherTab();
+        String originalWindow = driver.getWindowHandle();
+        for (String windowHandle : driver.getWindowHandles()) {
+            if(!originalWindow.contentEquals(windowHandle)) {
+                driver.switchTo().window(windowHandle);
+                break;
+            }
+        }
+        // new BrowserManipulation().switchToAnotherTab();
         String GoogleResult = new GoogleCloudPrisingCalculatorPage(driver).getTotalEstimatedCostText();
         GoogleResult = GoogleResult.split("USD ")[1];
         GoogleResult = GoogleResult.split(" per 1")[0];

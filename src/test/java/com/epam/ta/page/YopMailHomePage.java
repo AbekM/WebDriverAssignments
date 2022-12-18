@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public class YopMailHomePage extends AbstractPage {
-    @FindBy(xpath = "//b[contains(text(), 'Random Email')]")
+    @FindBy(xpath = "//h3[contains(text(), 'Random Email')]")
     public WebElement randomEmailGeneratorButton;
     public YopMailHomePage(WebDriver driver) {
         super(driver);
