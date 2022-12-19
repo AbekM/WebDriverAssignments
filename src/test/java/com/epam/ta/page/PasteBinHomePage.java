@@ -8,19 +8,19 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 
 public class PasteBinHomePage extends AbstractPage {
+
     @FindBy(xpath = "//textarea")
     public WebElement textArea;
-    @FindBy(xpath = "//span[contains(@id, 'select2-postform-expiration-container')]")
+    @FindBy(id = "select2-postform-expiration-container")
     private WebElement expirationContainer;
     @FindBy(xpath = "//span[@id='select2-postform-format-container']")
     private WebElement syntaxContainer;
-    @FindBy(xpath = "//input[@id='postform-name']")
+    @FindBy(xpath = "postform-name")
     private WebElement postFormTitle;
     @FindBy(xpath = "//button[contains(text(), 'Create New Paste')]")
     private WebElement createNewPasteButton;
@@ -43,7 +43,6 @@ public class PasteBinHomePage extends AbstractPage {
     }
 
     public PasteBinHomePage inputText(String text) {
-
         textArea.sendKeys(text);
         return this;
     }
@@ -64,7 +63,7 @@ public class PasteBinHomePage extends AbstractPage {
         postFormTitle.sendKeys(title);
     }
 
-    public String getPateTitle() {
+    public String getPasteTitle() {
         return postFormTitle.getText();
     }
 

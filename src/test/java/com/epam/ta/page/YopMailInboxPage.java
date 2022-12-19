@@ -9,25 +9,29 @@ import org.openqa.selenium.support.PageFactory;
 
 
 public class YopMailInboxPage extends AbstractPage {
-    @FindBy(xpath = "//button[@id='refresh']")
+
+    @FindBy(id = "refresh")
     public WebElement refreshButton;
-    @FindBy(xpath = "//div[@id='nbmail']")
+    @FindBy(id = "nbmail")
     public WebElement mailCount;
+
     private final By totalEstimatedCostMail =
             By.xpath("//body[contains(@class, 'bodymail')]//h2");
     private final By mailFrame =
             By.xpath("//iframe[@name='ifmail']");
+
     public YopMailInboxPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(this.driver, this);
     }
+
     public String getEmailText() {
         driver.switchTo().frame(driver.findElement(mailFrame));
         return  driver.findElement(totalEstimatedCostMail).getText();
     }
+
     public String getMailCount() {return  mailCount.getText();}
     public void refreshPage() {
         refreshButton.click();
     }
-
 }
