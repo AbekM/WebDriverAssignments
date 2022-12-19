@@ -17,18 +17,18 @@ public class BringItOnTest extends CommonConditions {
                 .selectExpirationDateTenMinutes()
                 .inputTitle(TestDataReader.getTestData("bringItOnTitle"));
         String Title = new PasteBinHomePage(driver).createNewPaste().getTitle();
-        Assert.assertEquals(Title, TestDataReader.getTestData("bringItOnTitle") + " - Pastebin.com");
+        Assert.assertEquals(Title, TestDataReader.getTestData("bringItOnTitle") + " - Pastebin.com", "New Paste title check");
     }
 
     @Test(description = "Syntax is the same as chosen", dependsOnMethods = {"checkInsertedCode"})
     public void verifySyntax(){
         String Syntax = new PastePage(driver).getSyntax();
-        Assert.assertEquals(Syntax, TestDataReader.getTestData("bringItOnSyntax"));
+        Assert.assertEquals(Syntax, TestDataReader.getTestData("bringItOnSyntax"), "Syntax is the same as chosen");
     }
 
     @Test(description = "Code is the same as inserted", dependsOnMethods = {"checkInsertedCode"})
     public void verifyPaste(){
         String PasteData = new PastePage(driver).getPasteData();
-        Assert.assertEquals(PasteData, TestDataReader.getTestData("bringItOnText"));
+        Assert.assertEquals(PasteData, TestDataReader.getTestData("bringItOnText"), "Code is the same as inserted");
     }
 }
