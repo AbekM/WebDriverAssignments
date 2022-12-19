@@ -12,6 +12,7 @@ import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class YopMailGeneratorPage extends AbstractPage {
+
     @FindBy(xpath = "//button[@id='cprnd']")
     public WebElement copyEmailButton;
     @FindBy(xpath = "//span[text() = 'Check Inbox']")
@@ -21,12 +22,13 @@ public class YopMailGeneratorPage extends AbstractPage {
         super(driver);
         PageFactory.initElements(this.driver, this);
     }
-    public YopMailGeneratorPage copyGeneratedEmail() {
+
+    public void copyGeneratedEmail() {
         driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(copyEmailButton)).click();
-        return this;
     }
+
     public YopMailInboxPage checkInbox() {
         checkInboxButton.click();
         return new YopMailInboxPage(driver);
