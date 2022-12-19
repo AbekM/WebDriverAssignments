@@ -1,7 +1,6 @@
 package com.epam.ta.tests;
 
 import com.epam.ta.driver.DriverSingleton;
-import com.epam.ta.util.BrowserManipulation;
 import com.epam.ta.util.TestListener;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
@@ -12,6 +11,19 @@ public class CommonConditions{
 
     protected WebDriver driver;
 
+    public void openNewTab(){
+        driver.switchTo().newWindow(WindowType.TAB);
+    }
+
+    public void switchToAnotherTab(){
+        String originalWindow = driver.getWindowHandle();
+        for (String windowHandle : driver.getWindowHandles()) {
+            if(!originalWindow.contentEquals(windowHandle)) {
+                driver.switchTo().window(windowHandle);
+                break;
+            }
+        }
+    }
 
     @BeforeClass()
     public void setUp()

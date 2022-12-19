@@ -2,11 +2,10 @@ package com.epam.ta.util;
 
 
 import com.epam.ta.tests.CommonConditions;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
 
 public class BrowserManipulation extends CommonConditions{
-    protected WebDriver driver;
+    //protected WebDriver driver;
 
 
     public void openNewTab(){
