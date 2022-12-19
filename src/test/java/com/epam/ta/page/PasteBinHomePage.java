@@ -35,30 +35,39 @@ public class PasteBinHomePage extends AbstractPage {
         super(driver);
         PageFactory.initElements(this.driver, this);
     }
+
     public PasteBinHomePage openPage() {
         driver.get(TestDataReader.getTestData("pasteBinURL"));
         driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
         return this;
     }
+
     public PasteBinHomePage inputText(String text) {
 
         textArea.sendKeys(text);
         return this;
     }
-    public PasteBinHomePage selectExpirationDate() {
+
+    public PasteBinHomePage selectExpirationDateTenMinutes() {
         expirationContainer.click();
         driver.findElement(expirationResultTenMinutes).click();
         return this;
     }
-    public PasteBinHomePage selectSyntax() {
+
+    public PasteBinHomePage selectSyntaxBash() {
         syntaxContainer.click();
         driver.findElement(syntaxSelectionBash).click();
         return this;
     }
-    public PasteBinHomePage inputTitle(String title) {
+
+    public void inputTitle(String title) {
         postFormTitle.sendKeys(title);
-        return this;
     }
+
+    public String getPateTitle() {
+        return postFormTitle.getText();
+    }
+
     public PastePage createNewPaste() {
         createNewPasteButton.click();
         new WebDriverWait(driver, Duration.ofSeconds(IMPLICIT_WAIT))
