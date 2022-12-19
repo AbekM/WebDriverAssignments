@@ -4,6 +4,8 @@ package com.epam.ta.tests;
 import com.epam.ta.page.*;
 import com.epam.ta.service.TestDataReader;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 
@@ -16,7 +18,7 @@ public class ICanWinTest extends CommonConditions {
                 .inputText(TestDataReader.getTestData("iCanWinText"))
                 .selectExpirationDateTenMinutes()
                 .inputTitle(titleToInsert);
-        //String title = new PasteBinHomePage(driver).getPasteTitle();
-        //Assert.assertEquals(new PasteBinHomePage(driver).getPasteTitle(), titleToInsert, "Titles match");
+        /*String title = new PasteBinHomePage(driver).getPasteTitle();
+        Assert.assertEquals(title, titleToInsert, "Titles match");*/
     }
 }

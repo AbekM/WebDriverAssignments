@@ -20,7 +20,7 @@ public class PasteBinHomePage extends AbstractPage {
     private WebElement expirationContainer;
     @FindBy(xpath = "//span[@id='select2-postform-format-container']")
     private WebElement syntaxContainer;
-    @FindBy(xpath = "postform-name")
+    @FindBy(id = "postform-name")
     private WebElement postFormTitle;
     @FindBy(xpath = "//button[contains(text(), 'Create New Paste')]")
     private WebElement createNewPasteButton;
