@@ -5,8 +5,6 @@ import com.epam.ta.tests.CommonConditions;
 import org.openqa.selenium.WindowType;
 
 public class BrowserManipulation extends CommonConditions{
-    //protected WebDriver driver;
-
 
     public void openNewTab(){
         driver.switchTo().newWindow(WindowType.TAB);

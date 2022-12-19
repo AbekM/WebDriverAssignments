@@ -28,6 +28,7 @@ public class HurtMePlenty extends CommonConditions {
                 new GoogleCloudPrisingCalculatorPage(driver).compareCommittedTerms() &
                 new GoogleCloudPrisingCalculatorPage(driver).compareProvisioningModel() &
                 new GoogleCloudPrisingCalculatorPage(driver).compareInstanceType() &
-                new GoogleCloudPrisingCalculatorPage(driver).compareSsd());
+                new GoogleCloudPrisingCalculatorPage(driver).compareSsd(),
+                "Google Calculator result matches estimation");
     }
 }
