@@ -49,7 +49,7 @@ public class HardcoreTest extends CommonConditions {
         String googleResult = new GoogleCloudPrisingCalculatorPage(driver).getTotalEstimatedCostText();
         googleResult = googleResult.split("USD ")[1];
         googleResult = googleResult.split(" per 1")[0];
-        mailResult = mailResult.split("USD ")[1];
+        mailResult = mailResult.split("USD1 ")[1];
         Assert.assertEquals(googleResult, mailResult, "Email result matches Google calculator");
     }
 }
