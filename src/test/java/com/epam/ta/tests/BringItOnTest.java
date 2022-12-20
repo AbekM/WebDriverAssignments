@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 public class BringItOnTest extends CommonConditions {
 
+
     @Test(description = "New Paste title check", priority = 1)
     public void checkInsertedCode(){
         new PasteBinHomePage(driver).openPage()

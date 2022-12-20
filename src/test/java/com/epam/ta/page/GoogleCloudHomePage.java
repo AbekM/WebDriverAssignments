@@ -33,4 +33,6 @@ public class GoogleCloudHomePage extends AbstractPage {
         driver.findElement(searchBox).sendKeys(TestDataReader.getTestData("hurtMePlentySearchText"), Keys.ENTER);
         return new GoogleCloudSearchResultsPage(driver);
     }
+
+
 }
