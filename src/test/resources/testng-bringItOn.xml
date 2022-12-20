@@ -11,3 +11,5 @@
         </classes>
     </test>
 </suite>
+
+        mvn -Dbrowser=chrome -Dsurefire="src\test\resources\testng-bringItOn.xml" -Denvironment=bringItOn clean test
