@@ -1,6 +1,6 @@
 package com.epam.ta.page;
 
-import com.epam.ta.service.TestDataReader;
+import com.epam.ta.model.VirtualMachine;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -36,31 +36,14 @@ public class GoogleCloudPrisingCalculatorPage extends AbstractPage {
     @FindBy(xpath = "//button[@ng-click='listingCtrl.addComputeServer(ComputeEngineForm);']")
     public WebElement addEstimateButton;
 
-    private final By operatingSystemSelection =
-            By.xpath("//md-option/div[contains(text(),'Free: Debian, CentOS, CoreOS, Ubuntu')]");
-    private final By provisioningModelSelection =
-            By.xpath("//md-option/div[contains(text(),'Regular')]");
-    private final By seriesSelection =
-            By.xpath("//md-option[@value='n1']");
-    private final By machineTypeSelection =
-            By.xpath("//md-option/div[contains(text(),'n1-standard-8')]");
+
+
+
+
     private final By gpuTypeContainer =
             By.xpath("//md-select[@ng-model='listingCtrl.computeServer.gpuType']");
-    private final By gpuTypeSelector =
-            By.xpath("//md-option[@value='NVIDIA_TESLA_T4']");
     private final By gpuCountContainer =
             By.xpath("//md-select[@ng-model='listingCtrl.computeServer.gpuCount']");
-    private final By gpuCountSelector=
-            By.xpath("//md-option[contains(@ng-repeat, 'listingCtrl.supportedGpuNumbers')]" +
-                    "/div[contains(text(), '1')]");
-    private final By localSsdSelector=
-            By.xpath("//md-option[@ng-repeat='item in " +
-                    "listingCtrl.dynamicSsd.computeServer' and @value = '2']");
-    private final By databaseLocationSelector=
-            By.xpath("//md-option[@region-option and @value='europe-west3' " +
-                    "and @id='select_option_228']/div");
-    private final By committedUsageSelector=
-            By.xpath("//md-option[@value='1' and @id = 'select_option_128']/div");
     private final By regionResult=
             By.xpath("//div[@class='md-list-item-text ng-binding' " +
                     "and contains(text(), 'Region')]");
@@ -95,46 +78,69 @@ public class GoogleCloudPrisingCalculatorPage extends AbstractPage {
         PageFactory.initElements(this.driver, this);
     }
 
-    public GoogleCloudPrisingCalculatorPage inputInstances() {
+    public GoogleCloudPrisingCalculatorPage switchToInnerFrame(){
         driver.switchTo().frame(driver.findElement(mainIframe));
         driver.switchTo().frame(driver.findElement(myIframe));
+        return this;
+    }
+    public GoogleCloudPrisingCalculatorPage inputInstances(VirtualMachine VM) {
         instancesInput.click();
-        instancesInput.sendKeys(TestDataReader.getTestData("hurtMePlentyNumberOfInstances"));
+        instancesInput.sendKeys(VM.getNumberOfInstances());
         return this;
     }
 
-    public GoogleCloudPrisingCalculatorPage chooseOS() {
+    public GoogleCloudPrisingCalculatorPage chooseOS(VirtualMachine VM) {
+
+        final By operatingSystemSelection =
+                By.xpath("//md-option/div[contains(text(),'" + VM.getOS() + "')]");
+
         operatingSystemContainer.click();
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(operatingSystemSelection)).click();
         return this;
     }
 
-    public GoogleCloudPrisingCalculatorPage chooseVMClass() {
+    public GoogleCloudPrisingCalculatorPage chooseVMClass(VirtualMachine VM) {
+
+        final By provisioningModelSelection =
+                By.xpath("//md-option/div[contains(text(),'" + VM.getVMClass() + "')]");
+
         provisioningModelContainer.click();
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(provisioningModelSelection)).click();
         return this;
     }
 
-    public GoogleCloudPrisingCalculatorPage chooseSeries() {
+    public GoogleCloudPrisingCalculatorPage chooseSeries(VirtualMachine VM) {
+
+        final By seriesSelection =
+                By.xpath("//md-option[@value='" + VM.getSeries() + "']");
+
         seriesContainer.click();
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(seriesSelection)).click();
         return this;
     }
 
-    public GoogleCloudPrisingCalculatorPage chooseInstanceType() {
-        seriesContainer.click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.elementToBeClickable(seriesSelection)).click();
+    public GoogleCloudPrisingCalculatorPage chooseInstanceType(VirtualMachine VM) {
+
+        final By machineTypeSelection =
+                By.xpath("//md-option/div[contains(text(),'" + VM.getInstanceType() + "')]");
+
         machineTypeContainer.click();
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(machineTypeSelection)).click();
         return this;
     }
 
-    public GoogleCloudPrisingCalculatorPage addGpus() {
+    public GoogleCloudPrisingCalculatorPage addGpus(VirtualMachine VM) {
+
+        final By gpuTypeSelector =
+                By.xpath("//md-option[@value='" + VM.getTypeOfGPUs() + "']");
+        final By gpuCountSelector=
+                By.xpath("//md-option[contains(@ng-repeat, 'listingCtrl.supportedGpuNumbers')]" +
+                        "/div[contains(text(), '" + VM.getNumberOfGPUs() + "')]");
+
         addGPUCheckbox.click();
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(gpuTypeContainer)).click();
@@ -147,21 +153,36 @@ public class GoogleCloudPrisingCalculatorPage extends AbstractPage {
         return this;
     }
 
-    public GoogleCloudPrisingCalculatorPage chooseSsd() {
+    public GoogleCloudPrisingCalculatorPage chooseSsd(VirtualMachine VM) {
+
+        final By localSsdSelector=
+                By.xpath("//md-option[@ng-repeat='item in " +
+                        "listingCtrl.dynamicSsd.computeServer' and @value = '" + VM.getSSD() + "']");
+
         localSSDContainer.click();
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(localSsdSelector)).click();
         return this;
     }
 
-    public GoogleCloudPrisingCalculatorPage chooseDatabaseLocation() {
+    public GoogleCloudPrisingCalculatorPage chooseDatabaseLocation(VirtualMachine VM) {
+
+        final By databaseLocationSelector=
+                By.xpath("//md-option[@region-option and @value='" + VM.getDatabaseLocation() +
+                        "' and @id='select_option_228']/div");
+
         databaseLocationContainer.click();
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(databaseLocationSelector)).click();
         return this;
     }
 
-    public GoogleCloudPrisingCalculatorPage chooseCommittedUsage() {
+    public GoogleCloudPrisingCalculatorPage chooseCommittedUsage(VirtualMachine VM) {
+
+        final By committedUsageSelector=
+                By.xpath("//md-option[@value='" + VM.getCommittedUsage() + "' " +
+                        "and @id = 'select_option_128']/div");
+
         committedUsageContainer.click();
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(committedUsageSelector)).click();
@@ -174,32 +195,27 @@ public class GoogleCloudPrisingCalculatorPage extends AbstractPage {
     }
 
     public String getRegion() {
-        String result = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+        return new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(regionResult)).getText();
-        return result;
     }
 
     public String getCommittedTerms() {
-        String result = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+        return new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(committedTermResult)).getText();
-        return result;
     }
 
     public String getProvisioningModel() {
-        String result = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+        return new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(provisioningModelResult)).getText();
-        return result;
     }
 
     public String getInstanceType() {
-        String result = driver.findElement(instanceTypeResult).getText();
-        return result;
+        return driver.findElement(instanceTypeResult).getText();
     }
 
     public String getSsd() {
-        String result = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+        return new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(ssdResult)).getText();
-        return result;
     }
 
     public GoogleCloudPrisingCalculatorPage clickEmailButton() {
@@ -230,18 +246,18 @@ public class GoogleCloudPrisingCalculatorPage extends AbstractPage {
                 .until(ExpectedConditions.presenceOfElementLocated(totalEstimatedCostSelector)).getText();
     }
 
-    public void createVM() {
+    public GoogleCloudPrisingCalculatorPage createVM(VirtualMachine VM) {
         new GoogleCloudPrisingCalculatorPage(driver)
-                .inputInstances()
-                .chooseOS()
-                .chooseVMClass()
-                .chooseSeries()
-                .chooseInstanceType()
-                .addGpus()
-                .chooseSsd()
-                .chooseDatabaseLocation()
-                .chooseCommittedUsage()
-                .clickAddToEstimateButton()
-                .clickEmailButton();
+                .inputInstances(VM)
+                .chooseOS(VM)
+                .chooseVMClass(VM)
+                .chooseSeries(VM)
+                .chooseInstanceType(VM)
+                .addGpus(VM)
+                .chooseSsd(VM)
+                .chooseDatabaseLocation(VM)
+                .chooseCommittedUsage(VM);
+        return this;
+
     }
 }

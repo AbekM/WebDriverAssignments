@@ -1,7 +1,9 @@
 package com.epam.ta.tests;
 
 
+import com.epam.ta.model.VirtualMachine;
 import com.epam.ta.page.*;
+import com.epam.ta.service.VMCreator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -9,11 +11,15 @@ import org.testng.annotations.Test;
 public class HardcoreTest extends CommonConditions {
     @Test(description = "Email result matches Google calculator")
     public void compareEmailResultWithCalculator() throws InterruptedException {
+        VirtualMachine VM = VMCreator.withCredentialsFromProperty();
         new GoogleCloudHomePage(driver)
                 .openPage()
                 .inputSearch()
                 .clickOnSearchResult()
-                .createVM();
+                .switchToInnerFrame()
+                .createVM(VM)
+                .clickAddToEstimateButton()
+                .clickEmailButton();
         openNewTab();
         new YopMailHomePage(driver)
                 .openPage()
