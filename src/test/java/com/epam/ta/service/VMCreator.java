@@ -29,7 +29,7 @@ public class VMCreator {
     }
 
     public static VirtualMachine withDefaultParameters(){
-        return new VirtualMachine("1", "", "", "", "", "", "",
-                "", "", "");
+        return new VirtualMachine("1", "", "", "", "", "",
+                "","", "", "");
     }
 }

@@ -36,10 +36,6 @@ public class GoogleCloudPrisingCalculatorPage extends AbstractPage {
     @FindBy(xpath = "//button[@ng-click='listingCtrl.addComputeServer(ComputeEngineForm);']")
     public WebElement addEstimateButton;
 
-
-
-
-
     private final By gpuTypeContainer =
             By.xpath("//md-select[@ng-model='listingCtrl.computeServer.gpuType']");
     private final By gpuCountContainer =
@@ -231,8 +227,6 @@ public class GoogleCloudPrisingCalculatorPage extends AbstractPage {
     }
 
     public GoogleCloudPrisingCalculatorPage inputCopiedEmail() {
-        driver.switchTo().frame(driver.findElement(mainIframe));
-        driver.switchTo().frame(driver.findElement(myIframe));
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(emailField)).click();
         driver.findElement(emailField).sendKeys(Keys.CONTROL + "V");
@@ -258,6 +252,5 @@ public class GoogleCloudPrisingCalculatorPage extends AbstractPage {
                 .chooseDatabaseLocation(VM)
                 .chooseCommittedUsage(VM);
         return this;
-
     }
 }

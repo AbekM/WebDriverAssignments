@@ -27,6 +27,7 @@ public class HardcoreTest extends CommonConditions {
                 .copyGeneratedEmail();
         switchToAnotherTab();
         new GoogleCloudPrisingCalculatorPage(driver)
+                .switchToInnerFrame()
                 .inputCopiedEmail()
                 .clickSendEmailButton();
         switchToAnotherTab();
@@ -37,9 +38,8 @@ public class HardcoreTest extends CommonConditions {
         String mailResult = new YopMailInboxPage(driver).getEmailText();
         switchToAnotherTab();
         String googleResult = new GoogleCloudPrisingCalculatorPage(driver).getTotalEstimatedCostText();
-        googleResult = googleResult.split("USD ")[1];
-        googleResult = googleResult.split(" per 1")[0];
-        mailResult = mailResult.split("USD ")[1];
+        googleResult = googleResult.replaceAll("\\D.", "");
+        mailResult = mailResult.replaceAll("\\D.", "");
         Assert.assertEquals(googleResult, mailResult, "Email result matches Google calculator");
     }
 }
