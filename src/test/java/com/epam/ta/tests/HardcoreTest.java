@@ -4,10 +4,9 @@ package com.epam.ta.tests;
 import com.epam.ta.page.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import java.util.Objects;
+
 
 public class HardcoreTest extends CommonConditions {
-
     @Test(description = "Email result matches Google calculator")
     public void compareEmailResultWithCalculator() throws InterruptedException {
         new GoogleCloudHomePage(driver)

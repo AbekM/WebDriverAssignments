@@ -1,11 +1,9 @@
 package com.epam.ta.tests;
 
-
 import com.epam.ta.page.*;
 import com.epam.ta.service.TestDataReader;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
 
 public class HurtMePlenty extends CommonConditions {
     @Test(description = "Compare Google Calculator with manual estimation")

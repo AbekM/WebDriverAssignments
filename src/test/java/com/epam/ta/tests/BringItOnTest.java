@@ -1,14 +1,11 @@
 package com.epam.ta.tests;
 
-
 import com.epam.ta.page.*;
 import com.epam.ta.service.TestDataReader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-
 public class BringItOnTest extends CommonConditions {
-
 
     @Test(description = "New Paste title check", priority = 1)
     public void checkInsertedCode(){
