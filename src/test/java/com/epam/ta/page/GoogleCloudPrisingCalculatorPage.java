@@ -174,33 +174,33 @@ public class GoogleCloudPrisingCalculatorPage extends AbstractPage {
         return this;
     }
 
-    public Boolean compareRegion() {
-        String Result = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+    public String getRegion() {
+        String result = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(regionResult)).getText();
-        return Objects.equals(Result, TestDataReader.getTestData("hurtMePlentyRegion"));
+        return result;
     }
 
-    public Boolean compareCommittedTerms() {
-        String Result = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+    public String getCommittedTerms() {
+        String result = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(committedTermResult)).getText();
-        return Objects.equals(Result, TestDataReader.getTestData("hurtMePlentyCommitmentTerm"));
+        return result;
     }
 
-    public Boolean compareProvisioningModel() {
-        String Result = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+    public String getProvisioningModel() {
+        String result = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(provisioningModelResult)).getText();
-        return Objects.equals(Result, TestDataReader.getTestData("hurtMePlentyVMClass"));
+        return result;
     }
 
-    public Boolean compareInstanceType() {
-        String Result = driver.findElement(instanceTypeResult).getText();
-        return Objects.equals(Result, TestDataReader.getTestData("hurtMePlentyInstanceType"));
+    public String getInstanceType() {
+        String result = driver.findElement(instanceTypeResult).getText();
+        return result;
     }
 
-    public Boolean compareSsd() {
-        String Result = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+    public String getSsd() {
+        String result = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(ssdResult)).getText();
-        return Objects.equals(Result, TestDataReader.getTestData("hurtMePlentyLocalSSD"));
+        return result;
     }
 
     public GoogleCloudPrisingCalculatorPage clickEmailButton() {
@@ -229,5 +229,20 @@ public class GoogleCloudPrisingCalculatorPage extends AbstractPage {
         driver.switchTo().frame(driver.findElement(myIframe));
         return new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.presenceOfElementLocated(totalEstimatedCostSelector)).getText();
+    }
+
+    public void createVM() {
+        new GoogleCloudPrisingCalculatorPage(driver)
+                .inputInstances()
+                .chooseOS()
+                .chooseVMClass()
+                .chooseSeries()
+                .chooseInstanceType()
+                .addGpus()
+                .chooseSsd()
+                .chooseDatabaseLocation()
+                .chooseCommittedUsage()
+                .clickAddToEstimateButton()
+                .clickEmailButton();
     }
 }

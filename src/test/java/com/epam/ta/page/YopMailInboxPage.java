@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.Objects;
+
 
 public class YopMailInboxPage extends AbstractPage {
 
@@ -31,7 +33,17 @@ public class YopMailInboxPage extends AbstractPage {
     }
 
     public String getMailCount() {return  mailCount.getText();}
+
     public void refreshPage() {
         refreshButton.click();
+    }
+
+    public void waitForTheEmail() throws InterruptedException {
+        int i = 0;
+        while (Objects.equals(new YopMailInboxPage(driver).getMailCount(), "0 mail") & i != 10) {
+            Thread.sleep(2000);
+            new YopMailInboxPage(driver).refreshPage();
+            i++;
+        }
     }
 }

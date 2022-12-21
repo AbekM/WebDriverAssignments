@@ -2,12 +2,12 @@ package com.epam.ta.tests;
 
 
 import com.epam.ta.page.*;
-import org.testng.Assert;
+import com.epam.ta.service.TestDataReader;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 
 public class HurtMePlenty extends CommonConditions {
-
     @Test(description = "Compare Google Calculator with manual estimation")
     public void checkGoogleCalculatorResults() {
         new GoogleCloudHomePage(driver)
@@ -24,11 +24,18 @@ public class HurtMePlenty extends CommonConditions {
                 .chooseDatabaseLocation()
                 .chooseCommittedUsage()
                 .clickAddToEstimateButton();
-        Assert.assertTrue(new GoogleCloudPrisingCalculatorPage(driver).compareRegion() &
-                new GoogleCloudPrisingCalculatorPage(driver).compareCommittedTerms() &
-                new GoogleCloudPrisingCalculatorPage(driver).compareProvisioningModel() &
-                new GoogleCloudPrisingCalculatorPage(driver).compareInstanceType() &
-                new GoogleCloudPrisingCalculatorPage(driver).compareSsd(),
-                "Google Calculator result matches estimation");
+
+        SoftAssert softAssertion = new SoftAssert();
+        GoogleCloudPrisingCalculatorPage page = new GoogleCloudPrisingCalculatorPage(driver);
+        softAssertion.assertEquals(page.getRegion(),
+                TestDataReader.getTestData("hurtMePlentyRegion"),"Regions match");
+        softAssertion.assertEquals(page.getCommittedTerms(),
+                TestDataReader.getTestData("hurtMePlentyCommitmentTerm"),"Committed Terms match");
+        softAssertion.assertEquals(page.getProvisioningModel(),
+                TestDataReader.getTestData("hurtMePlentyVMClass"),"Provisioning Model match");
+        softAssertion.assertEquals(page.getInstanceType(),
+                TestDataReader.getTestData("hurtMePlentyInstanceType"),"Instance Type match");
+        softAssertion.assertEquals(page.getSsd(),
+                TestDataReader.getTestData("hurtMePlentyLocalSSD"),"SSD match");
     }
 }
