@@ -28,7 +28,7 @@ public class TestListener implements ITestListener {
     }
 
     public void onTestFailure(ITestResult iTestResult) {
-        saveScreenshot();
+
     }
 
     public void onTestSkipped(ITestResult iTestResult) {
